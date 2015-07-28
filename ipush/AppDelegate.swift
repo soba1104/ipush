@@ -15,8 +15,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        var types: UIUserNotificationType =
+            UIUserNotificationType.Badge |
+            UIUserNotificationType.Alert |
+            UIUserNotificationType.Sound
+        var settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: types, categories: nil)
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
         return true
+    }
+
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        var charset: NSCharacterSet = NSCharacterSet(charactersInString: "<>")
+        var desc: NSString = deviceToken.description
+        var token: String = desc.stringByTrimmingCharactersInSet(charset)
+        NSLog(token)
     }
 
     func applicationWillResignActive(application: UIApplication) {
