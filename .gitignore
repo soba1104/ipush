@@ -45,3 +45,4 @@ Carthage/Checkouts
 
 # Vim
 .*.swp
+/tmp
